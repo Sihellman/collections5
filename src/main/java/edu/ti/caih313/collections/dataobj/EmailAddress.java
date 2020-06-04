@@ -15,9 +15,10 @@ public class EmailAddress {
         emailMap.put(type, emailAddress);
     }
     public EmailAddress(){
-
+        //do nothing. This constructor is here so that EmailAddress methods can be called on Person's getEmail
+        //if Person's getEmail is null
     }
-    public Map<Type, String> getEmailMap(){
+    public  Map<Type, String> getEmailMap(){
         return emailMap;
     }
 
@@ -38,24 +39,40 @@ public class EmailAddress {
     }
 
     public String getEmailAddress(Type type) {
-        String emailAddress = emailMap.get(type);
-        if(emailMap.get(type) == null){
-          emailAddress = "<no email address available>";
-        }
-        return emailAddress;
+        return emailMap.get(type);
+        
     }
 
     private boolean valid(String emailAddress) {
         return (emailAddress != null) && emailAddress.contains("@");
     }
+
     public String toString(){
-        StringBuilder toString = new StringBuilder("<HOME:")
-                .append(getEmailAddress(Type.HOME))
-                .append(", SCHOOL:")
-                .append(getEmailAddress(Type.SCHOOL))
-                .append(", WORK:")
-                .append(getEmailAddress(Type.WORK))
-                .append(">");
-        return toString.toString();
+        String string;
+        if(getEmailAddress() != null){
+            StringBuilder toString = new StringBuilder("<");
+            if(emailMap.get(Type.HOME) != null){
+                toString.append("HOME: ")
+                        .append(emailMap.get(Type.HOME))
+                        .append(", ");
+            }
+            if(emailMap.get(Type.WORK) != null){
+                toString.append("WORK: ")
+                        .append(emailMap.get(Type.WORK))
+                        .append(", ");
+            }
+            if(emailMap.get(Type.SCHOOL) != null){
+                toString.append("SCHOOL: ")
+                        .append(emailMap.get(Type.SCHOOL))
+                        .append(", ");
+            }
+            toString.append(">");
+            toString.delete(toString.length()-3, toString.length()-1);
+            string =toString.toString();
+        }
+        else{
+           string = "<no email address available>";
+        }
+        return string;
     }
 }

@@ -61,17 +61,8 @@ public class Person {
 
 
 
-    @Override
+
     public String toString() {
-        StringBuilder toString = new StringBuilder("Person{name=")
-                .append(name)
-                .append(", gender=")
-                .append(gender)
-                .append(", birthDate=")
-                .append(birthDate.format(format))
-                .append(", emails=")
-                .append(getEmail().toString())
-                .append("}");
-        return toString.toString();
+        return String.format("Person{name=%s, gender=%s, birthDate=%s, emails=%s}", name, gender, birthDate.format(format), getEmail().toString());
     }
 }
