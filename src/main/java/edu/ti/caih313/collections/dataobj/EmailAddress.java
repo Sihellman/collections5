@@ -14,6 +14,12 @@ public class EmailAddress {
         }
         emailMap.put(type, emailAddress);
     }
+    public EmailAddress(){
+
+    }
+    public Map<Type, String> getEmailMap(){
+        return emailMap;
+    }
 
     public String getEmailAddress() {
         return getPrimaryEmailAddress();
@@ -32,10 +38,24 @@ public class EmailAddress {
     }
 
     public String getEmailAddress(Type type) {
-        return emailMap.get(type);
+        String emailAddress = emailMap.get(type);
+        if(emailMap.get(type) == null){
+          emailAddress = "<no email address available>";
+        }
+        return emailAddress;
     }
 
     private boolean valid(String emailAddress) {
         return (emailAddress != null) && emailAddress.contains("@");
+    }
+    public String toString(){
+        StringBuilder toString = new StringBuilder("<HOME:")
+                .append(getEmailAddress(Type.HOME))
+                .append(", SCHOOL:")
+                .append(getEmailAddress(Type.SCHOOL))
+                .append(", WORK:")
+                .append(getEmailAddress(Type.WORK))
+                .append(">");
+        return toString.toString();
     }
 }
